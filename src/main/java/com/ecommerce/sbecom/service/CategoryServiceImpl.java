@@ -1,7 +1,10 @@
 package com.ecommerce.sbecom.service;
 
 import com.ecommerce.sbecom.model.Category;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +50,9 @@ public class CategoryServiceImpl implements CategoryService{
             existingCategory.setCategoryName(category.getCategoryName());
             return  existingCategory;
         }
-        return null;
+        else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
+        }
     }
 
 }
